@@ -2,5 +2,5 @@
 
 int main()
 {
-    cout << "hello world"
+    cout << "goodbye world"
 }
