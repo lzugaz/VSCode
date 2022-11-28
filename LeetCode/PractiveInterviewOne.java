@@ -18,5 +18,5 @@ public class PractiveInterviewOne {
         int lo = 0;
         while (lo < hi && res[lo] == '0') lo++;
         return lo == hi ? "0" : new String(res, lo, hi - lo);
-    }
+    }   
 }
