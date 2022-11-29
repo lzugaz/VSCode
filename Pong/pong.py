@@ -1,4 +1,5 @@
 import turtle
+# pong by Lucas Ugaz
 
 wn = turtle.Screen()
 wn.title("Pong By Lucas Ugaz")
