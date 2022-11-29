@@ -1,0 +1,144 @@
+
+#include <string.h>
+#include <stdio.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <math.h>
+
+#include "rpn.h"
+#include "nextword.h"
+#include "stack.h"
+
+double rpn_eval(char * fileName, double x) {
+	FILE *fd;
+	char * words;
+	int flag = 0;
+	int number = 0;
+	double power,logz, exponent,div,sine,cosine,iv,num,w,f,a,b,c,d,e,g,h,i,j,k,l,m,n,z,sum,mul,sub;
+	fd = fopen(fileName, "r");
+	if (fd == NULL){
+		printf("Could not open file %s\n",fileName);
+		exit(1);
+}
+	while((words = nextword(fd)) != NULL){
+		if(strcmp(words,"+") == 0) {
+			//number = 0;
+  				  w = stack_pop();
+                  f = stack_pop();
+                  sum = f + w;
+                  stack_push(sum);
+                  flag++;
+		}else if(strcmp(words,"*") == 0){
+			number = 1;
+		}else if(strcmp(words, "-") == 0){
+			number = 2;
+		}else if(strcmp(words, "/") == 0){
+			number = 3;
+		}else if(strcmp(words, "sin") == 0){
+			number = 4;
+		}else if(strcmp(words, "cos") == 0){
+			number = 5;
+		}else if(strcmp(words, "pow") == 0){
+			number = 6;
+		}else if(strcmp(words, "log") == 0){
+			number = 7;
+		}else if(strcmp(words, "exp") == 0){
+			number = 8;
+		}else if(strcmp(words, "x") == 0){
+			number = 9;
+		}else {
+			number = 10;
+		}
+		
+		switch(number){
+			case 0:
+				w = stack_pop();
+				f = stack_pop();
+				sum = f + w;
+				stack_push(sum);
+				flag++;
+				break;
+			case 1:
+				a = stack_pop();
+				b = stack_pop();
+				mul = b * a;
+				stack_push(mul);
+				flag++;
+				break;
+			case 2:
+				c = stack_pop();
+				d = stack_pop();
+				sub = d - c;
+				stack_push(sub);
+				flag++;				
+				break;
+			case 3:
+				e = stack_pop();
+				z = stack_pop();
+				div = z / e;
+				flag++;
+				break;
+			case 4:
+				g = stack_pop();
+				sine = sin(g);
+				stack_push(sine);
+				break;
+			case 5:
+				h = stack_pop();
+				cosine = cos(h);
+				stack_push(cosine);
+				break;
+			case 6:
+				i = stack_pop();
+				j = stack_pop();
+				power = pow(j,i);
+				stack_push(power);
+				break;
+			case 7:
+				k = stack_pop();
+				logz = log(k);
+				stack_push(logz);
+				break;
+			case 8:
+				l = stack_pop();
+				exponent = exp(l);
+				stack_push(exponent);
+				break;
+			case 9:
+				stack_push(x);
+				flag = 0;
+				break;
+			case 10:
+				num;
+				char *pt;
+				num = strtod(words, &pt);
+				stack_push(num);
+				flag = 0;
+				break;
+		}
+}
+			
+				
+		
+	
+			if(flag > 2) {
+				printf("stack underflow\n");
+				exit(0);
+			}
+			if (stack_top() != 1){
+				printf("Elements remain in the stack\n");
+				exit(0);
+			}
+			else{
+				return stack_pop();
+			}
+			fclose(fd);
+
+
+	
+	
+
+
+  
+}
+
