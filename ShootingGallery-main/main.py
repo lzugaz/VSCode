@@ -1,4 +1,4 @@
-# Python Arcade Shooting Gallery!
+# Shooting game by Lucas Ugaz
 import pygame
 import math
 
