@@ -1,0 +1,26 @@
+{
+  "name": "Pixelator",
+  "version": "1.0.0",
+  "description": "HashLips Art Pixelator is a tool used to convert multiple images to pixelated images.",
+  "main": "index.js",
+  "bin": "index.js",
+  "pkg": {
+    "assets": [
+      "layers/**/*"
+    ],
+    "scripts": [
+      "src/main.js",
+      "src/config.js"
+    ],
+    "outputPath": "dist"
+  },
+  "scripts": {
+    "build": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lucas Ugaz",
+  "license": "MIT",
+  "dependencies": {
+    "canvas": "^2.8.0"
+  }
+}
